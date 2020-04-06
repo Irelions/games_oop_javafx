@@ -7,10 +7,10 @@ import java.util.Arrays;
 
 /**
  * //TODO add comments.
- *
- * @author Petr Arsentev (parsentev@yandex.ru)
- * @version $Id$
- * @since 0.1
+ *  *
+ *  * @author Petr Arsentev (parsentev@yandex.ru)
+ *  * @version $Id$
+ *  * @since 0.1
  */
 public class Logic {
     private final int size;
@@ -71,6 +71,33 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
+        int count;
+
+        //Проверка на выйгрышную вертикаль
+        for (int i = 0; i != size; i++){
+            count = 0;
+            for (int j = 0; j != size; j++) {
+                if (table[i][j] == 1) {
+                    count++;
+                    if(count == size) {
+                        result = true;
+                    }
+                }
+            }
+        }
+        //Проверка на выйгрыщную горизонталь
+        for (int i = 0; i != size; i++){
+            count = 0;
+            for (int j = 0; j != size; j++) {
+                if (table[j][i] == 1) {
+                    count++;
+                    if(count == size) {
+                        result = true;
+                    }
+                }
+            }
+        }
+
         return result;
     }
 
