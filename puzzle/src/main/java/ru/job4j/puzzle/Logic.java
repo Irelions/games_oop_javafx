@@ -68,36 +68,46 @@ public class Logic {
         return rst;
     }
 
-    public boolean isWin() {
-        int[][] table = this.convert();
-        boolean result = false;
+    private boolean lineWin (int [][] table) {
         int count;
-
-        //Проверка на выйгрышную вертикаль
-        for (int i = 0; i != size; i++){
+        boolean result = false;
+        for (int i = 0; i != size; i++) {
             count = 0;
             for (int j = 0; j != size; j++) {
                 if (table[i][j] == 1) {
                     count++;
-                    if(count == size) {
-                        result = true;
-                    }
+                }
+                if (count == size) {
+                    return result;
                 }
             }
         }
-        //Проверка на выйгрыщную горизонталь
-        for (int i = 0; i != size; i++){
+        return result;
+    }
+
+    private boolean rowWin (int[][] table) {
+        int count;
+        boolean result = false;
+        for (int i = 0; i != size; i++) {
             count = 0;
             for (int j = 0; j != size; j++) {
                 if (table[j][i] == 1) {
                     count++;
-                    if(count == size) {
-                        result = true;
-                    }
+                }
+                if (count == size) {
+                    return result;
                 }
             }
         }
+        return result;
+    }
 
+    public boolean isWin() {
+        int[][] table = this.convert();
+        boolean result = false;
+        if (lineWin(table) || rowWin(table)) {
+            result = true;
+        }
         return result;
     }
 
