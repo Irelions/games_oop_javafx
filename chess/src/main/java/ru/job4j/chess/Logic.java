@@ -26,9 +26,22 @@ public class Logic {
         int index = this.findBy(source);
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+            if (steps.length > 0 && steps[steps.length - 1].equals(dest) && cleanWay(steps)) {
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
+            }
+        }
+        return rst;
+    }
+
+    public boolean cleanWay(Cell[] steps) {
+        boolean rst = true;
+        for (int index = 0; index != steps.length; index++) {
+            for (int j = 0; j != figures.length; j++) {
+                if (this.figures[j] != null && steps[index].equals(this.figures[j].position())) {
+                    rst = false;
+                    break;
+                }
             }
         }
         return rst;
@@ -54,8 +67,6 @@ public class Logic {
 
     @Override
     public String toString() {
-        return "Logic{" +
-                "figures=" + Arrays.toString(this.figures) +
-                '}';
+        return "Logic{" + "figures=" + Arrays.toString(this.figures) + '}';
     }
 }
